@@ -13,7 +13,7 @@
 
   <style>
     /* ============================================================
-       JAMEEL NOORI NASTALEEQ — 
+       JAMEEL NOORI NASTALEEQ
     ============================================================ */
     @font-face {
       font-family: 'JameelNoori';
@@ -279,52 +279,80 @@
     section:nth-child(even) { background: var(--dark2); }
 
     /* ============================================================
-       INGREDIENTS
+       INGREDIENTS 
     ============================================================ */
     #ingredients .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 16px;
       margin-top: 40px;
     }
+
     .ingredient-card {
       background: var(--dark3);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 28px 24px;
+      padding: 18px 16px;
       transition: border-color 0.3s, transform 0.3s;
+      background-image: none !important;
+      background-attachment: initial !important;
+      /* HORIZONTAL layout */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
     }
-    .ingredient-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-    .ing-icon { font-size: 2rem; margin-bottom: 12px; }
+    .ingredient-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+    .ing-img-circle-bg {
+      width: 90px;
+      height: 90px;
+      min-width: 90px;
+      border-radius: 50%;
+      border: 2px solid var(--gold);
+      box-shadow: 0 0 16px rgba(201,168,76,0.3);
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+
+    .ing-text-block {
+      flex: 1;
+      text-align: right;
+    }
+
+    .ing-icon { font-size: 1.2rem; margin-bottom: 4px; }
     .ing-name {
       font-family: var(--font-head);
-      font-size: 2.5rem;
-      color: white;
-      margin-bottom: 10px;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 6px;
+      line-height: 1.6;
     }
     .ing-benefits { list-style: none; padding: 0; }
     .ing-benefits li {
-      font-size: 1.1rem;
+      font-size: 0.88rem;
       font-weight: 400;
-      color: white;
-      padding: 4px 0;
+      color: var(--text);
+      padding: 2px 0;
       display: flex;
       align-items: flex-start;
-      gap: 8px;
+      gap: 6px;
       font-family: var(--font-head);
-      line-height: 2;
+      line-height: 1.8;
     }
     .ing-benefits li::before {
       content: '✦';
       color: var(--gold);
-      font-size: 0.7rem;
-      margin-top: 6px;
+      font-size: 0.6rem;
+      margin-top: 5px;
       flex-shrink: 0;
     }
-    .pic1 { background-image: url("Assets/001.png"); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; }
-    .pic2 { background-image: url("Assets/002.png"); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; }
-    .pic3 { background-image: url("Assets/003.png"); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; }
-    .pic4 { background-image: url("Assets/004.png"); background-repeat: no-repeat; background-attachment: fixed; background-size: cover; }
+
+    .pic1-bg { background-image: url("Assets/001.png"); }
+    .pic2-bg { background-image: url("Assets/002.png"); }
+    .pic3-bg { background-image: url("Assets/003.png"); }
+    .pic4-bg { background-image: url("Assets/004.png"); }
 
     /* ============================================================
        BENEFITS
@@ -342,9 +370,21 @@
       padding: 28px 20px;
       text-align: center;
       transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .benefit-card:hover { border-color: var(--gold); transform: translateY(-4px); }
     .benefit-card .icon { font-size: 2.4rem; margin-bottom: 14px; }
+    /* Image inside benefit card — contained, not overflowing */
+    .benefit-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      display: block;
+    }
     .benefit-card h3 {
       font-family: var(--font-head);
       font-size: 1.1rem;
@@ -473,17 +513,42 @@
       padding: 12px 14px;
       color: var(--text);
       font-family: var(--font-head);
-      font-size: 0.95rem;
+      font-size: 1rem;
       direction: rtl;
       outline: none;
       transition: border-color 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+      min-height: 50px;
     }
     .form-group input:focus,
     .form-group select:focus { border-color: var(--gold); }
     .form-group input::placeholder { color: var(--muted); font-family: var(--font-head); }
-    .form-group select option { font-family: var(--font-head); }
+    /* Select wrapper with custom arrow */
+    .select-wrapper {
+      position: relative;
+    }
+    .select-wrapper::after {
+      content: '▼';
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
+      font-size: 0.65rem;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .form-group select option {
+      font-family: 'Noto Sans Arabic', sans-serif;
+      background: #1a1a22;
+      color: #f5f0e8;
+      font-size: 14px;
+      padding: 10px;
+      direction: rtl;
+    }
 
-    /* WhatsApp contact row */
+    /* WhatsApp contact */
     .whatsapp-bar {
       display: flex;
       align-items: center;
@@ -587,10 +652,8 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ============================================================
-       RESPONSIVE
+       RESPONSIVE — TABLET ≤ 900px
     ============================================================ */
-
-    /* Tablet ≤ 900px */
     @media (max-width: 900px) {
       #hero {
         background-attachment: scroll;
@@ -598,17 +661,17 @@
       }
       #benefits .grid { grid-template-columns: repeat(2, 1fr); }
 
-      /* Stack order section vertically on tablet */
       .order-split {
         grid-template-columns: 1fr;
         gap: 28px;
       }
-      /* Image comes first (top) on tablet/mobile */
       .order-img-col { order: -1; }
       .order-img-col img { max-width: 420px; margin: 0 auto; }
     }
 
-    /* Mobile ≤ 700px */
+    /* ============================================================
+       RESPONSIVE — MOBILE ≤ 700px
+    ============================================================ */
     @media (max-width: 700px) {
       /* Sale badge */
       .sale-badge { top: 70px; left: 10px; padding: 8px 10px; min-width: 64px; }
@@ -632,13 +695,18 @@
 
       /* Ingredients */
       #ingredients .grid { grid-template-columns: 1fr; }
-      .ing-name { font-size: 1.6rem; }
-      .ing-benefits li { font-size: 0.95rem; }
-      .pic1, .pic2, .pic3, .pic4 { background-attachment: scroll; background-size: cover; }
+      .ingredient-card {
+        flex-direction: row;
+        padding: 14px 12px;
+        gap: 12px;
+      }
+      .ing-img-circle-bg { width: 75px; height: 75px; min-width: 75px; }
+      .ing-name { font-size: 1.2rem; }
+      .ing-benefits li { font-size: 0.82rem; }
 
       /* Benefits */
       #benefits .grid { grid-template-columns: 1fr; }
-      .benefit-card img { width: 100% !important; height: auto !important; max-height: 200px; object-fit: cover; }
+      .benefit-card img { width: 100% !important; height: 180px !important; object-fit: cover; }
 
       /* Why */
       #why .points { grid-template-columns: 1fr; }
@@ -652,6 +720,18 @@
       .whatsapp-bar { flex-direction: column; gap: 8px; text-align: center; }
       .whatsapp-bar .wa-text { text-align: center; }
 
+      /* FIX: Select/input readable on mobile */
+      .form-group input,
+      .form-group select {
+        font-size: 1rem;
+        padding: 13px 14px;
+        min-height: 52px;
+      }
+      .form-group select option {
+        font-size: 14px;
+        padding: 10px;
+      }
+
       /* Navbar */
       .logo-text { font-size: 1.1rem; }
       .nav-btn { font-size: 0.82rem; padding: 7px 14px; }
@@ -661,11 +741,35 @@
       .imgwapisi { width: 100%; }
     }
 
-    /* Very small ≤ 380px */
+    /* ============================================================
+       RESPONSIVE — VERY SMALL ≤ 380px
+    ============================================================ */
     @media (max-width: 380px) {
       .btn-order { font-size: 0.95rem; padding: 12px 24px; }
       .hero-tagline { font-size: 1.3rem; }
       .sale-badge { display: none; }
+
+      .form-group input,
+      .form-group select {
+        font-size: 0.95rem;
+        padding: 11px 12px;
+      }
+      .ing-img-circle-bg {
+        width: 65px;
+        height: 65px;
+        min-width: 65px;
+      }
+      .ing-name { font-size: 1rem; }
+      .benefit-card img { height: 150px !important; }
+      #benefits .grid { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — LARGE SCREENS ≥ 1200px
+    ============================================================ */
+    @media (min-width: 1200px) {
+      .container { max-width: 1100px; }
+      #benefits .grid { grid-template-columns: repeat(3, 1fr); }
     }
   </style>
 </head>
@@ -730,44 +834,60 @@
 
       <div class="grid">
 
-        <div class="ingredient-card reveal pic1">
-          <div class="ing-icon">🌿</div>
-          <div class="ing-name">Horny Goat Weed</div>
-          <ul class="ing-benefits">
-            <li>جنسی خواہش میں اضافہ</li>
-            <li>مضبوط اور مستحکم ایریکشن کی حمایت</li>
-            <li>تھکن کو کم کرنا اور توانائی بڑھانا</li>
-          </ul>
+        <!-- Card 1 -->
+        <div class="ingredient-card reveal">
+          <div class="ing-img-circle-bg pic1-bg"></div>
+          <div class="ing-text-block">
+            <div class="ing-icon">🌿</div>
+            <div class="ing-name">Horny Goat Weed</div>
+            <ul class="ing-benefits">
+              <li>جنسی خواہش میں اضافہ</li>
+              <li>مضبوط اور مستحکم ایریکشن کی حمایت</li>
+              <li>تھکن کو کم کرنا اور توانائی بڑھانا</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="ingredient-card reveal pic2">
-          <div class="ing-icon">🌱</div>
-          <div class="ing-name">Maca</div>
-          <ul class="ing-benefits">
-            <li>عضو تناسل کے سائز اور لمبائی میں اضافہ</li>
-            <li>تولیدی صلاحیت اور خون کے بہاؤ کی حمایت</li>
-            <li>توجہ اور یادداشت میں بہتری</li>
-          </ul>
+        <!-- Card 2 -->
+        <div class="ingredient-card reveal">
+          <div class="ing-img-circle-bg pic2-bg"></div>
+          <div class="ing-text-block">
+            <div class="ing-icon">🌱</div>
+            <div class="ing-name">Maca</div>
+            <ul class="ing-benefits">
+              <li>عضو تناسل کے سائز اور لمبائی میں اضافہ</li>
+              <li>تولیدی صلاحیت اور خون کے بہاؤ کی حمایت</li>
+              <li>توجہ اور یادداشت میں بہتری</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="ingredient-card reveal pic3">
-          <div class="ing-icon">🍃</div>
-          <div class="ing-name">Kat Alli</div>
-          <ul class="ing-benefits">
-            <li>پروسٹیٹ کی صحت کی حمایت</li>
-            <li>نطفہ کے معیار میں بہتری</li>
-            <li>پریشانی اور تناؤ کو کم کرنا</li>
-          </ul>
+        <!-- Card 3 -->
+        <div class="ingredient-card reveal">
+          <div class="ing-img-circle-bg pic3-bg"></div>
+          <div class="ing-text-block">
+            <div class="ing-icon">🍃</div>
+            <div class="ing-name">Kat Alli</div>
+            <ul class="ing-benefits">
+              <li>پروسٹیٹ کی صحت کی حمایت</li>
+              <li>نطفہ کے معیار میں بہتری</li>
+              <li>پریشانی اور تناؤ کو کم کرنا</li>
+            </ul>
+          </div>
         </div>
 
-        <div class="ingredient-card reveal pic4">
-          <div class="ing-icon">🌾</div>
-          <div class="ing-name">Ginseng</div>
-          <ul class="ing-benefits">
-            <li>انزال پر مکمل کنٹرول</li>
-            <li>ذہنی اور جسمانی توانائی میں اضافہ</li>
-            <li>کارکردگی اور برداشت میں بہتری</li>
-          </ul>
+        <!-- Card 4 -->
+        <div class="ingredient-card reveal">
+          <div class="ing-img-circle-bg pic4-bg"></div>
+          <div class="ing-text-block">
+            <div class="ing-icon">🌾</div>
+            <div class="ing-name">Ginseng</div>
+            <ul class="ing-benefits">
+              <li>انزال پر مکمل کنٹرول</li>
+              <li>ذہنی اور جسمانی توانائی میں اضافہ</li>
+              <li>کارکردگی اور برداشت میں بہتری</li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -790,7 +910,7 @@
 
         <div class="benefit-card reveal">
           <div class="icon">💪</div>
-          <img height="220px" width="310px" src="Assets/0001.png" alt="">
+          <img src="Assets/0001.png" alt="بڑھا ہوا سائز">
           <h3>بڑھا ہوا سائز</h3>
           <br>
           <h5>لمبائی اور حجم میں قدرتی اور واضح اضافہ کا لطف اٹھائیں، عضو تناسل کے تکلیف دہ اور غیر یقینی سرجری کے بجائے، جو مردانہ ماہرین کی تصدیق کے مطابق محفوظ نہیں۔</h5>
@@ -798,7 +918,7 @@
 
         <div class="benefit-card reveal">
           <div class="icon">⚡</div>
-          <img height="220px" width="310px" src="Assets/0002.jpg" alt="">
+          <img src="Assets/0002.jpg" alt="زیادہ مضبوط ایریکشن">
           <h3>زیادہ مضبوط ایریکشن</h3>
           <br>
           <h5>خون کے بہاؤ کو متحرک کرنا اور مضبوط و مستحکم ایریکشن کی حمایت، تاکہ آپ طاقت اور اطمینان سے بھرپور ایک نئی تجربے سے لطف اندوز ہو سکیں۔</h5>
@@ -806,7 +926,7 @@
 
         <div class="benefit-card reveal">
           <div class="icon">🎯</div>
-          <img height="220px" width="310px" src="Assets/0003.png" alt="">
+          <img src="Assets/0003.png" alt="مکمل کنٹرول والا انزال">
           <h3>مکمل کنٹرول والا انزال</h3>
           <br>
           <h5>اپنی خاص لمحے پر مکمل کنٹرول… جب چاہیں عروج تک پہنچنے کا لطف اٹھائیں، بھرپور طاقت اور احساس کے ساتھ۔</h5>
@@ -814,7 +934,7 @@
 
         <div class="benefit-card reveal">
           <div class="icon">🔥</div>
-          <img height="220px" width="310px" src="Assets/0004.jpg" alt="">
+          <img src="Assets/0004.jpg" alt="زیادہ توانائی بخش کارکردگی">
           <h3>زیادہ توانائی بخش کارکردگی</h3>
           <br>
           <h5>پوری طاقت کے ساتھ آگے بڑھیں! نہ رکنے والی سرگرمی اور ایسی توانائی جو دن کے آغاز سے رات کے اختتام تک آپ کا ساتھ دے۔</h5>
@@ -822,7 +942,7 @@
 
         <div class="benefit-card reveal">
           <div class="icon">✨</div>
-          <img height="220px" width="310px" src="Assets/0005.jpg" alt="">
+          <img src="Assets/0005.jpg" alt="مثالی زرخیزی">
           <h3>مثالی زرخیزی</h3>
           <br>
           <h5>اپنی مردانگی کو قدرتی طاقت دیں… تولیدی صحت کی مضبوط حمایت اور نطفہ کے اعلیٰ معیار کے لیے۔</h5>
@@ -830,7 +950,7 @@
 
         <div class="benefit-card reveal">
           <div class="icon">🌟</div>
-          <img height="220px" width="310px" src="Assets/block2.1.png" alt="">
+          <img src="Assets/certifiedimg.avif" alt="اصل پروڈکٹ">
           <h3>اصل پروڈکٹ 100%</h3>
           <br>
           <h5>قومــــی لیبارٹریز کی جانــــــــب سے منظور شــــــــدہ اور تصدیــــــــــق شــــــــدہ، اعلیٰ معیار اور کارکردگی کے ساتھ معتبر</h5>
@@ -932,7 +1052,7 @@
 
             <div class="form-group">
               <label>موبائل نمبر *</label>
-              <input type="tel" id="phone" placeholder="03XX-XXXXXXX" />
+              <input type="tel" id="phone" placeholder="03XX-XXXXXXX" dir="ltr" style="text-align:right;" />
             </div>
 
             <div class="form-group">
@@ -945,13 +1065,16 @@
               <input type="text" id="address" placeholder="گھر/دفتر کا پتہ" />
             </div>
 
+            <!-- FIX: select wrapped for proper arrow + mobile readability -->
             <div class="form-group">
               <label>تعداد</label>
-              <select id="qty">
-                <option value="1">۱ بوتل</option>
-                <option value="2">۲ بوتلیں (خصوصی رعایت)</option>
-                <option value="3">۳ بوتلیں (زیادہ بچت)</option>
-              </select>
+              <div class="select-wrapper">
+                <select id="qty">
+                  <option value="1">۱ بوتل</option>
+                  <option value="2">۲ بوتلیں — خصوصی رعایت</option>
+                  <option value="3">۳ بوتلیں — زیادہ بچت</option>
+                </select>
+              </div>
             </div>
 
             <button class="form-submit" onclick="submitOrder()">آرڈر کریں</button>
